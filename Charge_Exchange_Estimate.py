@@ -15,21 +15,36 @@ p=101325/760*p_torr; #Pa
 n_g=p/(k_b*T_g);#m^-3
 # print("n_g=",n_g)
 step=0.001
-l=np.arange(0,0.1+step,step)
+l=np.arange(0,1+step,step)
 n_x=np.zeros((len(l),len(n_g)))
 
 for i in range(len(l)):
     for j in range(len(n_g)):
         n_x[i][j]=math.exp(-sigma_cex*n_g[j]*l[i])
 
+
+fig,ax=plt.subplots()
+
 # Plot the lines
 labels=[str(i) for i in p_coef]
-lineObjects=plt.plot(l,n_x)
+lineObjects=plt.plot(l*1000,n_x*100)
 plt.legend(lineObjects,labels,title='Pressures [mTorr]:')
-plt.xlabel("Distance From Source [m]")
-plt.ylabel("Normalized Ion Density [$m^{-3}$]")
+plt.xlabel("Distance From Source [mm]")
+plt.ylabel("% Ions Remaining")
 # plt.legend(title='Pressures [mTorr]:')
 
-plt.xlim(0,max(l))
-plt.ylim(0,1)
+plt.xlim(0,max(l*1000))
+plt.ylim(0,100)
+
+fig1,ax1=plt.subplots()
+# SemiLog the lines
+labels=[str(i) for i in p_coef]
+lineObjects=plt.semilogy(l*1000,n_x*100)
+plt.legend(lineObjects,labels,title='Pressures [mTorr]:')
+plt.xlabel("Distance From Source [mm]")
+plt.ylabel("% Ions Remaining")
+# plt.legend(title='Pressures [mTorr]:')
+
+plt.xlim(0,max(l*1000))
+plt.ylim(1e-3,100)
 plt.show()
