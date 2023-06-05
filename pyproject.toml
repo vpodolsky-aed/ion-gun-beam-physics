@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "ion-gun-beam-physics"
+version = "0.1.0"
+description = "Ion Source Phyiscs Modelling"
+authors = ["Vlad Podolsky <vpodolsky@avalanche.energy>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+matplotlib = "^3.7.1"
+pandas = "^2.0.1"
+numpy = "^1.24.3"
+openpyxl = "^3.1.2"
